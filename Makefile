@@ -64,7 +64,7 @@ link: paranoid
 	avr-gcc -Os -Wl,--gc-sections -mmcu=atmega328p -o test.c.elf squarewave.c.o test.c.o
 	avr-objcopy -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0 test.c.elf test.c.eep 
 	avr-objcopy -O ihex -R .eeprom test.c.elf test.c.hex
-	avr-gcc -Os -Wl,--gc-sections -mmcu=atmega328p -o test.c.elf test.c.o
+	avr-gcc -Os -Wl,--gc-sections -mmcu=atmega328p -o test.c.elf test.c.o squarewave.c
 
 clean:
 	rm -f *.elf *.o *.d *.eep *.hex
