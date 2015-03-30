@@ -34,7 +34,7 @@ int main(void)
   sei();
   
   /* Set the counter for 440Hz */
-  num_roll = 71;
+  num_roll = 0;
   num_match = 6;
   OCR2B = num_match;
   

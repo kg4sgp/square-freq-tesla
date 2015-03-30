@@ -5,22 +5,25 @@ test.c
 #include <stdlib.h>
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include <util/delay.h>
 #include "squarewave.h"
+#include <math.h>
 
 int main()
 {
-
+  sei();
   square_init();
 
   while(1){
-    uint16_t i;
-    uint16_t j;  
+ 
+    uint8_t i = 21;
     for(i = 21; i < 109; i++) {
       square_play(i);
-      for(j = 0; j< 65000; j++);
+      _delay_ms(100);
       square_stop();
-      for(j = 0; j< 65000; j++);
+      _delay_ms(1);
     }
+
   }
   
   return 0;  

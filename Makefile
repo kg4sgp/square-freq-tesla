@@ -62,10 +62,10 @@ pedantic: test.c
 
 link: paranoid
 	avr-gcc -Os -Wl,--gc-sections -mmcu=atmega328p -o test.c.elf squarewave.c.o test.c.o
+	avr-gcc -Os -Wl,--gc-sections -mmcu=atmega328p -o test.c.elf test.c.o squarewave.c
 	avr-objcopy -O ihex -j .eeprom --set-section-flags=.eeprom=alloc,load --no-change-warnings --change-section-lma .eeprom=0 test.c.elf test.c.eep 
 	avr-objcopy -O ihex -R .eeprom test.c.elf test.c.hex
-	avr-gcc -Os -Wl,--gc-sections -mmcu=atmega328p -o test.c.elf test.c.o squarewave.c
-
+	
 clean:
 	rm -f *.elf *.o *.d *.eep *.hex
 
@@ -74,7 +74,7 @@ splint:
 	splint +load iom328p -DF_CPU=16000000L -I${AVR}/include *.c
 
 flash:
-	avrdude -p m328p -c arduino -P /dev/ttyUSB0 -vvv -b 57600 -D -U flash:w:test.c.hex
+	avrdude -p m328p -c arduino -P /dev/ttyUSB0 -b 57600 -vvv -D -U flash:w:test.c.hex
 
 # Add all analysis tools here to run them all with one command.
 analyze:

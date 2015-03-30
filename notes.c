@@ -11,10 +11,13 @@ int main()
   printf("int notes[88][2] = {\n");
   for (i = 1; i <= 88; i++) {
     double freq, cycles, fract, integ;
+    double bits = 8;
+    double clock = 16000000;
+    double prescale = 1;
     freq = (pow(2, ((i-49)/12)) * 440);
-    cycles = (16000000/256/freq/2);
+    cycles = (clock/pow(2,bits)/freq/prescale/2);
     fract = modf(cycles, &integ);
-    fract = round(256*fract);
+    fract = round(pow(2,bits)*fract);
     printf("{ %d, %d }, /* Key %d */ \n", (int)integ, (int)fract, (int)i);
   }
   printf("};\n");
